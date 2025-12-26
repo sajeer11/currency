@@ -4,6 +4,7 @@ import path from 'path';
 import { Reader } from '@maxmind/geoip2-node';
 import { NextRequest } from 'next/server';
 import { headers } from "next/headers";
+import { fileURLToPath } from 'url';
 export async function GET(request: NextRequest) {
 
     const headersList = headers();
@@ -19,13 +20,13 @@ export async function GET(request: NextRequest) {
         // Use static IP for testing locally
         ip = "104.244.42.1"; // USA example; change to Germany/UAE etc.
     }
-
+    const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
     // 2. Load the database
     //   const dbPath = path.resolve('./GeoLite2-Country_20251223/GeoLite2-Country.mmdb');
     //   const dbBuffer = fs.readFileSync(dbPath);
     try {
-        const reader = Reader.open("./GeoLite2-Country_20251223/GeoLite2-Country.mmdb");
+        const reader = Reader.open(path.join(__dirname, "GeoLite2-Country_20251223/GeoLite2-Country.mmdb"));
         const response = (await reader).country(ip);
 
         console.log(JSON.stringify(response))
