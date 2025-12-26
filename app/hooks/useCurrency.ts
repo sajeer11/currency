@@ -17,7 +17,7 @@ export function useCurrency(amount: number) {
 
       try {
         // 1️⃣ Get dynamic country + currency
-        const locRes = await fetch("/api/get-location");
+        const locRes = await fetch("/api/geo");
         
         const locData = await locRes.json();
         console.log(locData)
@@ -27,7 +27,7 @@ export function useCurrency(amount: number) {
 
         // 2️⃣ Convert PKR → detected currency
         const convertRes = await fetch(
-          `/api/convert?amount=100&from=PKR&to=USD`
+          `/api/convert?amount=${amount}&from=PKR&to=${currency}`
         );
         const convertData = await convertRes.json();
         console.log(convertData)
