@@ -5,6 +5,7 @@ export async function GET() {
   // Get client IP from headers
   const headersList = headers();
   let ip = ((await headersList).get("x-forwarded-for") ?? "").split(",")[0].trim();
+
   // let ip = "202.47.38.24"
 
   // Detect if localhost

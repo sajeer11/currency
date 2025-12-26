@@ -35,6 +35,7 @@ export function useCurrency(amount: number) {
           typeof convertData.data.conversion_result === "number" ? convertData.data.conversion_result : amount;
       
         setData({ country, currency, convertedAmount });
+        console.log(`setData${setData}`)
       } catch (err) {
         console.error(err);
         setData({ country: "Pakistan", currency: "PKR", convertedAmount: amount });
