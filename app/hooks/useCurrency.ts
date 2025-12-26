@@ -19,7 +19,7 @@ export function useCurrency(amount: number) {
         // 1️⃣ Get dynamic country + currency
         const locRes = await fetch("/api/get-location");
         const locData = await locRes.json();
-        const currency = locData.currency || "PKR";
+        const currency =  locData.currency || "USD";
         const country = locData.country || "Pakistan";
 
         // 2️⃣ Convert PKR → detected currency
@@ -27,9 +27,10 @@ export function useCurrency(amount: number) {
           `/api/convert?amount=${amount}&from=PKR&to=${currency}`
         );
         const convertData = await convertRes.json();
+        
         const convertedAmount =
-          typeof convertData.result === "number" ? convertData.result : amount;
-
+          typeof convertData.data.conversion_result === "number" ? convertData.data.conversion_result : amount;
+      
         setData({ country, currency, convertedAmount });
       } catch (err) {
         console.error(err);
