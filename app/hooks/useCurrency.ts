@@ -18,16 +18,19 @@ export function useCurrency(amount: number) {
       try {
         // 1️⃣ Get dynamic country + currency
         const locRes = await fetch("/api/get-location");
+        
         const locData = await locRes.json();
+        console.log(locData)
+        console.log(locData.ip)
         const currency =  locData.currency || "USD";
         const country = locData.country || "Pakistan";
 
         // 2️⃣ Convert PKR → detected currency
         const convertRes = await fetch(
-          `/api/convert?amount=${amount}&from=PKR&to=${currency}`
+          `/api/convert?amount=100&from=PKR&to=USD`
         );
         const convertData = await convertRes.json();
-        
+        console.log(convertData)
         const convertedAmount =
           typeof convertData.data.conversion_result === "number" ? convertData.data.conversion_result : amount;
       

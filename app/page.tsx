@@ -3,7 +3,7 @@ import { useCurrency } from "./hooks/useCurrency";
 
 export default function CurrencyDisplay() {
   const { data, loading } = useCurrency(1000);
-
+  console.log(data)
   if (loading) return <p>Loading...</p>;
 
   return (
@@ -11,7 +11,7 @@ export default function CurrencyDisplay() {
       <p>Country: {data?.country}</p>
       <p>Currency: {data?.currency}</p>
       <p>
-        1000 PKR = {data?.convertedAmount.toFixed(2)} {data?.currency}
+        PKR = {data?.convertedAmount.toFixed(2)} {data?.currency}
       </p>
     </div>
   );
