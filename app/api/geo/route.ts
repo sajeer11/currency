@@ -80,6 +80,7 @@ export const countryToCurrency = {
     JO: 'JOD',
     JP: 'JPY',
     KE: 'KES',
+    FR : 'EUR',
     KG: 'KGS',
     KH: 'KHR',
     KI: 'KID',
@@ -186,7 +187,7 @@ export async function GET(request: NextRequest) {
     }
     const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-    try {
+    try { 
         const reader = Reader.open(path.join(__dirname, "GeoLite2-Country_20251223/GeoLite2-Country.mmdb"));
         const response = (await reader).country(ip);
 
@@ -196,7 +197,7 @@ export async function GET(request: NextRequest) {
             country: response.country?.names.en || '',
             code: response.country?.isoCode || '',
             //@ts-ignore
-            currency: countryToCurrency[response.country?.isoCode || 'PK'] || 'PK'
+            currency: countryToCurrency[response.country?.isoCode || 'PK'] || 'PKR'
         });
     } catch (error) {
         console.log(error)
