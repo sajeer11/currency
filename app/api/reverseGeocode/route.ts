@@ -24,7 +24,7 @@ export async function GET(req: Request) {
 
     return NextResponse.json({
       name: data.display_name || "Unknown location",
-         des: data.display_des || "Unknown location",
+       
     });
   } catch (err) {
     console.error("Server fetch error:", err);
